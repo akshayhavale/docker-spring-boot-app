@@ -3,6 +3,7 @@
 
 
 
+
 Docker
 1. Docker is tool for running applications in an isolated environment
 2. Similar to virtual machine
@@ -123,7 +124,7 @@ that is 8080 is localhost port to access by browser
 
 -> ~docker stop CONTAINERID
 
--> ~docker stop ACTUALNAME   -> from this we are not removed completely we can start by using the same name
+-> ~docker stop ACTUALNAME   -> from this we are not removed completely we can start by using the same name
 		i.e ~docker start ACTUALNAME
 		ex:- ~docker start jolly_euler
 
@@ -180,10 +181,10 @@ ex:- ~docker run --name website -v $(pwd):/usr/share/nginx/html:ro -d -p 3212:80
 To Interact with Container by pausing the container execution 
 
 ~docker exec -it website bash
-
+or ~docker exec -it CONTAINERID /bin/sh then ls-al we get lynx file structure 
 inside the container to check files
 
-command is:       ls -al
+command is:       ls -al
 
 write permission given by just remove (ro)
 
@@ -213,8 +214,56 @@ https://spring.io/guides/gs/spring-boot-docker/
 https://stackoverflow.com/questions/55562381/not-able-to-connect-to-docker-image-with-a-spring-boot-application
 
 
-
-https://docs.docker.com/engine/reference/builder/
-
+https://docs.docker.com/engine/reference/builder/    -> For docker image build
 
 
+https://www.section.io/engineering-education/spring-docker/
+
+https://docs.docker.com/language/java/build-images/
+
+
+
+FROM -> Base image 
+ADD -> directory need to use
+WORKDIR -> jump to this directory
+RUN -> execute commands
+CMD -> USED FOR EXECUTION -> [EXECUTABLE, PARAM1, PARAM2]
+ex->["java", "-jar", "xyz.jar"]
+Same as ENTRYPOINT
+COPY
+
+16. DOCKER IMAGES BUILD commands
+~docker build --tag website:latest .
+
+dot -> means docker file in same directory
+
+17. Tagging and Versioning
+~docker tag website:latest webiste:1
+
+website:latest to website:1
+
+18. Docker Registry
+
+Push
+docker push akshayhavale/spring-docker-app-practice:tagname
+
+Pull
+docker pull akshayhavale/spring-docker-app-practice
+docker pull akshayhavale/spring-docker-app-practice:latest
+
+19. To inspect Container
+~docker inspect CONTAINERID
+
+20. Docker Logs
+
+~docker log CONTAINERID
+
+to follow log
+
+~docker log -f CONTAINERID
+
+21. Docker compose
+
+~docker-compose -f docker-compose.yml up
+
+~docker-compose -f docker-compose.yml down
